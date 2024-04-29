@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 
 # Read and process arbitrator info
 df = pd.read_csv("info_arbitrators.csv")
@@ -42,6 +43,20 @@ filtered_df = df[(df['years_listed'] >= years_served_range[0]) & (df['years_list
                 (df["delisted_age"] >= delisted_age_range[0]) & (df["delisted_age"] <= delisted_age_range[1]) &
                 (df["delisted"] == delisted_checkbox)]
 
+# Create n_cases histogram
+n_cases_fig, ax = plt.subplots(figsize=(4, 3))
+ax.hist(filtered_df['n_cases'], bins=30)
+ax.set_xlabel('Number of cases')
+ax.set_ylabel('Number of arbitrators')
+
+# Create years_listed histogram
+years_listed_fig, ax = plt.subplots(figsize=(4, 3))
+ax.hist(filtered_df['years_listed'], bins=30)
+ax.set_xlabel('Years listed')
+ax.set_ylabel('Number of arbitrators')
+
 # Display filtered data
 st.title('CAS Arbitrators')
 st.write(filtered_df)
+st.pyplot(n_cases_fig)
+st.pyplot(years_listed_fig)
