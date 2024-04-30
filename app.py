@@ -4,7 +4,24 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+# Configure page layout
+st.set_page_config(
+    page_title = "CAS Explorer",
+    layout="wide",  # or "centered"
+    initial_sidebar_state="auto"  # or "expanded" or "collapsed"
+)
 
+# Change the theme
+st.markdown(
+    """
+    <style>
+    .reportview-container {
+        background: #f0f0f0;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 # Read and process arbitrator info
 df = pd.read_csv("info_arbitrators.csv")
