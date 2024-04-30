@@ -4,12 +4,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-# st.set_page_config(
-    page_title="CAS Explorer",
+# Configure page layout
+st.set_page_config(
+    page_title = "CAS Explorer",
     layout="wide",  # or "centered"
     initial_sidebar_state="auto"  # or "expanded" or "collapsed"
 )
-
 
 # Change the theme
 st.markdown(
