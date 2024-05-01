@@ -6,16 +6,21 @@ import matplotlib.pyplot as plt
 # Configure page layout
 st.set_page_config(
     page_title = "CAS Explorer",
-    layout="wide",  # or "centered"
-    initial_sidebar_state="auto"  # or "expanded" or "collapsed"
+    layout="wide",
+    initial_sidebar_state="auto"
 )
 
-# Change the theme
+# Change the look
 st.markdown(
     """
     <style>
-    .reportview-container {
-        background: #f0f0f0;
+    /* Add your CSS rules here */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #FFFFFF;
+    }
+    h1 {
+        color: #FFFFFF;
     }
     </style>
     """,
@@ -43,7 +48,7 @@ with st.sidebar:
     n_cases_range = st.slider('Cases decided:',
                               min_value=0,
                               max_value=n_cases_max,
-                              alue=(0, n_cases_max))
+                              value=(0, n_cases_max))
 
     delisted_age_min = np.nanmin(df["delisted_age"])
     delisted_age_max = np.nanmax(df["delisted_age"])
