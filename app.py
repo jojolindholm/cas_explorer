@@ -15,6 +15,7 @@ st.set_page_config(
 df = pd.read_csv("info_arbitrators.csv")
 
 with st.sidebar:
+    st.image('images/coats_carton.png')
     st.title("Data filters")
     # Add dropdown menu for selection category
     delisted_checkbox = st.checkbox("Delisted", value=True)
@@ -68,7 +69,6 @@ ax.set_ylabel('Number of arbitrators')
 
 # Display data
 st.title('CAS Arbitrators')
-st.image('images/coats_carton.png')
 col1, col2 = st.columns([2,1])  # make col1 twice as wide as col2
 col1.write(filtered_df)
 col2.pyplot(n_cases_fig)
