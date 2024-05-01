@@ -14,13 +14,17 @@ st.set_page_config(
 st.markdown(
     """
     <style>
+    base="light"
+    primaryColor="#658cf7"
+    secondaryBackgroundColor="#e2e2e2"
+    textColor="#080808"
     /* Add your CSS rules here */
     body {
         font-family: Arial, sans-serif;
         background-color: #FFFFFF;
     }
     h1 {
-        color: #FFFFFF;
+        color: #0f0f0f;
     }
     </style>
     """,
