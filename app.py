@@ -17,10 +17,10 @@ df = pd.read_csv("info_arbitrators.csv")
 with st.sidebar:
     st.image('images/coats_carton.png',
              width=150)
-    st.title("Data filters")
+    # st.title("Data filters")
     # Add dropdown menu for selection category
     delisted_checkbox = st.checkbox("Delisted", value=True)
-    listed_checkbox = not st.checkbox("Listed", value=False)
+    listed_checkbox =  st.checkbox("Listed", value=False)
 
     # Add sliders for customizing the data
     years_listed_min = int(np.nanmin(df["years_listed"]))
@@ -36,8 +36,8 @@ with st.sidebar:
                               max_value=n_cases_max,
                               value=(0, n_cases_max))
 
-    delisted_age_min = np.nanmin(df["delisted_age"])
-    delisted_age_max = np.nanmax(df["delisted_age"])
+    delisted_age_min = int(np.nanmin(df["delisted_age"]))
+    delisted_age_max = int(np.nanmax(df["delisted_age"]))
     delisted_age_range = st.slider('Delisted age:',
                                 min_value=delisted_age_min,
                                 max_value=delisted_age_max,
@@ -54,7 +54,7 @@ filtered_df = df[(df['years_listed'] >= years_served_range[0]) &
                  (df['n_cases'] <= n_cases_range[1]) &
                  (df["delisted_age"] >= delisted_age_range[0]) &
                  (df["delisted_age"] <= delisted_age_range[1]) &
-                 (df["delisted"] == delisted_checkbox)]
+                 ((df["delisted"] == delisted_checkbox) | df["delisted"] != listed_checkbox)]
 
 # Create n_cases histogram
 n_cases_fig, ax = plt.subplots(figsize=(5, 3))
