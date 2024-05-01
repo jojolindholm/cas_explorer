@@ -16,7 +16,7 @@ df = pd.read_csv("info_arbitrators.csv")
 
 with st.sidebar:
     st.image('images/coats_carton.png',
-             width=2)
+             width=50)
     st.title("Data filters")
     # Add dropdown menu for selection category
     delisted_checkbox = st.checkbox("Delisted", value=True)
