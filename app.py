@@ -55,19 +55,20 @@ filtered_df = df[(df['years_listed'] >= years_served_range[0]) &
                  (df["delisted"] == delisted_checkbox)]
 
 # Create n_cases histogram
-n_cases_fig, ax = plt.subplots(figsize=(4, 3))
-ax.hist(filtered_df['n_cases'], bins=30)
+n_cases_fig, ax = plt.subplots(figsize=(5, 3))
+ax.hist(filtered_df['n_cases'], bins = 15)
 ax.set_xlabel('Number of cases')
 ax.set_ylabel('Number of arbitrators')
 
 # Create years_listed histogram
-years_listed_fig, ax = plt.subplots(figsize=(4, 3))
-ax.hist(filtered_df['years_listed'], bins=30)
+years_listed_fig, ax = plt.subplots(figsize=(5, 3))
+ax.hist(filtered_df['years_listed'], bins = 15)
 ax.set_xlabel('Years listed')
 ax.set_ylabel('Number of arbitrators')
 
 # Display data
 st.title('CAS Arbitrators')
+st.image('images/coats_carton.png')
 col1, col2 = st.columns([2,1])  # make col1 twice as wide as col2
 col1.write(filtered_df)
 col2.pyplot(n_cases_fig)
