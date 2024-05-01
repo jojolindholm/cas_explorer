@@ -23,8 +23,8 @@ with st.sidebar:
     listed_checkbox = not st.checkbox("Listed", value=False)
 
     # Add sliders for customizing the data
-    years_listed_min = np.nanmin(df["years_listed"])
-    years_listed_max = np.nanmax(df["years_listed"])
+    years_listed_min = int(np.nanmin(df["years_listed"]))
+    years_listed_max = int(np.nanmax(df["years_listed"]))
     years_served_range = st.slider('Years served:',
                                    min_value=years_listed_min,
                                    max_value=years_listed_max,
