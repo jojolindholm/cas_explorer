@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit_theme
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -8,27 +9,6 @@ st.set_page_config(
     page_title = "CAS Explorer",
     layout="wide",
     initial_sidebar_state="auto"
-)
-
-# Change the look
-st.markdown(
-    """
-    <style>
-    base="light"
-    primaryColor="#658cf7"
-    secondaryBackgroundColor="#e2e2e2"
-    textColor="#080808"
-    /* Add your CSS rules here */
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #FFFFFF;
-    }
-    h1 {
-        color: #0f0f0f;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
 )
 
 # Read and process arbitrator info
@@ -86,8 +66,11 @@ ax.hist(filtered_df['years_listed'], bins=30)
 ax.set_xlabel('Years listed')
 ax.set_ylabel('Number of arbitrators')
 
-# Display filtered data
+# Display data
 st.title('CAS Arbitrators')
-st.write(filtered_df)
+col1, col2 = st.columns(2)
+col1.write(filtered_df)
+col2.write('Column 2')
+# st.write(filtered_df)
 st.pyplot(n_cases_fig)
 st.pyplot(years_listed_fig)
