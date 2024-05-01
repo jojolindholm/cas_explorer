@@ -47,14 +47,14 @@ with st.sidebar:
 # unique_countries = sorted(list(set(df['country'])))
 # elected_country = st.selectbox('Select a country:', unique_countries)
 
-# Filter dataframe based selection
+# Filter dataframe based on selection
 filtered_df = df[(df['years_listed'] >= years_served_range[0]) &
                  (df['years_listed'] <= years_served_range[1]) &
                  (df['n_cases'] >= n_cases_range[0]) &
                  (df['n_cases'] <= n_cases_range[1]) &
                  (df["delisted_age"] >= delisted_age_range[0]) &
-                 (df["delisted_age"] <= delisted_age_range[1]) &
-                 ((df["delisted"] == delisted_checkbox) | df["delisted"] != listed_checkbox)]
+                 (df["delisted_age"] <= delisted_age_range[1])]
+#                 ((df["delisted"] == delisted_checkbox) | df["delisted"] != listed_checkbox)]
 
 # Create n_cases histogram
 n_cases_fig, ax = plt.subplots(figsize=(5, 3))
