@@ -47,18 +47,30 @@ with st.sidebar:
 # unique_countries = sorted(list(set(df['country'])))
 # elected_country = st.selectbox('Select a country:', unique_countries)
 
-# Filter dataframe based on selection
+# a function to filter the data based on delisted or listed
+def filter_data(df, delisted=True, listed=False):
+    if delisted and not listed:
+        return df[df['delisted'] == 1]
+    elif listed and not delisted:
+        return df[df['delisted'] == 0]
+    else:
+        return df
+
+# filter the data based on the selection
+filtered_df = filter_data(df, delisted=delisted_checkbox, listed=listed_checkbox)
+
 filtered_df = df[(df['years_listed'] >= years_served_range[0]) &
                  (df['years_listed'] <= years_served_range[1]) &
                  (df['n_cases'] >= n_cases_range[0]) &
                  (df['n_cases'] <= n_cases_range[1]) &
                  (df["delisted_age"] >= delisted_age_range[0]) &
-                 (df["delisted_age"] <= delisted_age_range[1]) & 
-                 ((df["delisted"] == delisted_checkbox))]
+                 (df["delisted_age"] <= delisted_age_range[1]) |
+                 (pd.isnull(df["delisted_age"]))]
 
 # Create n_cases histogram
 n_cases_fig, ax = plt.subplots(figsize=(5, 3))
-ax.hist(filtered_df['n_cases'], bins = 15)
+ax.hist(filtered_df['n_cases'], 
+        bins = max(df['n_cases']) - min(df['n_cases']) + 1)
 ax.set_xlabel('Number of cases')
 ax.set_ylabel('Number of arbitrators')
 
