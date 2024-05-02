@@ -15,8 +15,11 @@ st.set_page_config(
 df = pd.read_csv("info_arbitrators.csv")
 
 with st.sidebar:
+    # center this image
     st.image('images/coats_carton.png',
-             width=150)
+             width=150,
+             use_column_width=True,
+             caption='Image Caption')
     # st.title("Data filters")
     # Add dropdown menu for selection category
     delisted_checkbox = st.checkbox("Delisted", value=True)
