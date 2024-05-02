@@ -20,7 +20,7 @@ with st.sidebar:
     # st.title("Data filters")
     # Add dropdown menu for selection category
     delisted_checkbox = st.checkbox("Delisted", value=True)
-    listed_checkbox =  st.checkbox("Listed", value=False)
+    listed_checkbox =  st.checkbox("Listed", value=True)
 
     # Add sliders for customizing the data
     years_listed_min = int(np.nanmin(df["years_listed"]))
@@ -57,8 +57,6 @@ def filter_data(df, delisted=True, listed=False):
         return df
 
 # filter the data based on the selection
-filtered_df = filter_data(df, delisted=delisted_checkbox, listed=listed_checkbox)
-
 filtered_df = df[(df['years_listed'] >= years_served_range[0]) &
                  (df['years_listed'] <= years_served_range[1]) &
                  (df['n_cases'] >= n_cases_range[0]) &
@@ -67,16 +65,22 @@ filtered_df = df[(df['years_listed'] >= years_served_range[0]) &
                  (df["delisted_age"] <= delisted_age_range[1]) |
                  (pd.isnull(df["delisted_age"]))]
 
+filtered_df = filter_data(filtered_df, delisted=delisted_checkbox, listed=listed_checkbox)
+
+# remove columns that are not needed
+filtered_df = filtered_df.drop(columns=['arb_id', 'also_known_as', 'associated_with', 'case_nums', 'delisted'])
+
 # Create n_cases histogram
 n_cases_fig, ax = plt.subplots(figsize=(5, 3))
 ax.hist(filtered_df['n_cases'], 
-        bins = max(df['n_cases']) - min(df['n_cases']) + 1)
+        bins = np.nanmax(filtered_df['n_cases']) - np.nanmin(filtered_df['n_cases']) + 1)
 ax.set_xlabel('Number of cases')
 ax.set_ylabel('Number of arbitrators')
 
 # Create years_listed histogram
 years_listed_fig, ax = plt.subplots(figsize=(5, 3))
-ax.hist(filtered_df['years_listed'], bins = 15)
+ax.hist(filtered_df['years_listed'].dropna(), 
+        bins = 15)
 ax.set_xlabel('Years listed')
 ax.set_ylabel('Number of arbitrators')
 
